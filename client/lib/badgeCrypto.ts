@@ -98,7 +98,7 @@ async function getKey(): Promise<CryptoKey> {
   if (!cachedKeyPromise) {
     cachedKeyPromise = crypto.subtle.importKey(
       "raw",
-      base64ToBytes(getRawKeyBase64()),
+      base64ToBytes(getRawKeyBase64()) as BufferSource,
       { name: "AES-GCM" },
       false,
       ["encrypt", "decrypt"],
