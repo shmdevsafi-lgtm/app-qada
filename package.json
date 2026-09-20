@@ -30,7 +30,7 @@
     "drizzle-orm": "0.45.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.3",
-    "nodemailer": "^10.0.10",
+    "nodemailer": "^9.1.0",
     "qrcode": "^1.5.4",
     "qr-scanner": "^1.4.2",
     "ws": "^8.21.3",
