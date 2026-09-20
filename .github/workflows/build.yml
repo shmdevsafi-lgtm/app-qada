@@ -131,6 +131,25 @@ jobs:
           distribution: "temurin"
           java-version: "21"
 
+      # android-actions/setup-android@v3 downloads a fresh cmdline-tools
+      # revision (the runner's preinstalled one is the wrong version) and
+      # then runs `sdkmanager --licenses` to accept the SDK package
+      # licenses. That's normally silent, but on the current runner image
+      # it drops into an interactive "Review licenses (y/N)?" prompt —
+      # there's no terminal in CI to answer it, so the process just exits
+      # 1. Pre-writing the accepted-license hashes ourselves means
+      # sdkmanager finds them already accepted and never prompts.
+      - name: Pre-accept Android SDK licenses
+        run: |
+          mkdir -p /usr/local/lib/android/sdk/licenses
+          echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > /usr/local/lib/android/sdk/licenses/android-sdk-license
+          echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> /usr/local/lib/android/sdk/licenses/android-sdk-license
+          echo "84831b9409646a918e30573bab4c9c91346d8abd" >> /usr/local/lib/android/sdk/licenses/android-sdk-license
+          echo "601085b94cd77f0b54ff86406957099ebe79c4d6" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license
+          echo "504667f4c0de7af1a06de9f4b1727b84351f2910" > /usr/local/lib/android/sdk/licenses/google-gdk-license
+          echo "33b6a2b64607f11b759f320ef9dff4ae5c47d97a" > /usr/local/lib/android/sdk/licenses/android-googletv-license
+          echo "d975f751698a77b662f1254ddbeed3901e976f5" > /usr/local/lib/android/sdk/licenses/intel-android-extra-license
+
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
