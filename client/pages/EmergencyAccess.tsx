@@ -155,19 +155,14 @@ export default function EmergencyAccess() {
                   <span className="inline-block mt-2 px-4 py-1 rounded-full bg-red-50 text-shm-red font-bold">
                     {badge.generatedId}
                   </span>
-                  {genderLabel && <p className="text-gray-500 text-sm mt-2">{genderLabel}</p>}
                 </div>
 
                 <dl className="divide-y divide-gray-100 border border-gray-200 rounded-xl overflow-hidden">
-                  <InfoRow label="UUID" value={badge.uuid} mono />
                   <InfoRow label="Date de naissance" value={badge.birthDate} />
-                  <InfoRow label="Téléphone" value={badge.phone} />
-                  <InfoRow label="Patrouille" value={badge.patrol} />
-                  <InfoRow label="Rôle" value={badge.role} />
-                  <InfoRow
-                    label="Haute patrouille"
-                    value={badge.isHighPatrol === null || badge.isHighPatrol === undefined ? null : badge.isHighPatrol ? 'Oui' : 'Non'}
-                  />
+                  <InfoRow label="Tuteur/Parent" value={guardianName || null} />
+                  <InfoRow label="Téléphone (1)" value={badge.guardianPhone} mono />
+                  <InfoRow label="Téléphone (2)" value={badge.guardianPhone2} mono />
+                  <InfoRow label="Informations médicales" value={badge.medicalInfo} />
                 </dl>
 
                 <button
