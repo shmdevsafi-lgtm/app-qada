@@ -151,7 +151,15 @@ jobs:
           echo "d975f751698a77b662f1254ddbeed3901e976f5" > /usr/local/lib/android/sdk/licenses/intel-android-extra-license
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        env:
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+        run: |
+          SDKMANAGER=/usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager
+          if [ ! -x "$SDKMANAGER" ]; then
+            SDKMANAGER=/usr/local/lib/android/sdk/cmdline-tools/16.0/bin/sdkmanager
+          fi
+          yes | "$SDKMANAGER" --licenses || true
+          "$SDKMANAGER" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Build client (bundled into the APK — this is now the whole app)
         env:
