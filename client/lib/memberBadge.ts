@@ -19,15 +19,29 @@ import { decryptBadgePayload, type BadgeMemberPayload } from "./badgeCrypto";
 export interface ParsedMemberBadge {
   valid: boolean;
   generatedId?: string;
-  uuid?: string;
   firstName?: string;
   lastName?: string;
   birthDate?: string | null;
-  phone?: string | null;
-  patrol?: string | null;
-  role?: string | null;
-  gender?: string | null;
-  isHighPatrol?: boolean | null;
+  guardianFirstName?: string | null;
+  guardianLastName?: string | null;
+  guardianPhone?: string | null;
+  guardianPhone2?: string | null;
+  medicalInfo?: string | null;
+}
+
+function toParsedBadge(payload: BadgeMemberPayload): ParsedMemberBadge {
+  return {
+    valid: true,
+    generatedId: payload.i,
+    firstName: payload.f,
+    lastName: payload.l,
+    birthDate: payload.b,
+    guardianFirstName: payload.gf,
+    guardianLastName: payload.gl,
+    guardianPhone: payload.gp,
+    guardianPhone2: payload.gp2,
+    medicalInfo: payload.m,
+  };
 }
 
 function toParsedBadge(payload: BadgeMemberPayload): ParsedMemberBadge {
