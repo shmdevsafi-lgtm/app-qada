@@ -94,11 +94,9 @@ export default function EmergencyAccess() {
     startScanning();
   };
 
-  const genderLabel = (() => {
-    if (badge?.gender === 'male') return 'ذكر';
-    if (badge?.gender === 'female') return 'أنثى';
-    return '';
-  })();
+  const guardianName = [badge?.guardianFirstName, badge?.guardianLastName]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
