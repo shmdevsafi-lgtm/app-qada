@@ -200,7 +200,7 @@ export async function getKeyFingerprint(): Promise<string> {
   try {
     const raw = getRawKeyBase64();
     const bytes = base64ToBytes(raw);
-    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    const digest = await crypto.subtle.digest("SHA-256", bytes as BufferSource);
     return bytesToBase64Url(new Uint8Array(digest)).slice(0, 8);
   } catch {
     return "ABSENTE"; // VITE_BADGE_ENCRYPTION_KEY not set on this build at all.
