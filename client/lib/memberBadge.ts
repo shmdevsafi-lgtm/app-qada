@@ -44,22 +44,6 @@ function toParsedBadge(payload: BadgeMemberPayload): ParsedMemberBadge {
   };
 }
 
-function toParsedBadge(payload: BadgeMemberPayload): ParsedMemberBadge {
-  return {
-    valid: true,
-    generatedId: payload.id,
-    uuid: payload.uuid,
-    firstName: payload.firstName,
-    lastName: payload.lastName,
-    birthDate: payload.birthDate,
-    phone: payload.phone,
-    patrol: payload.patrol,
-    role: payload.role,
-    gender: payload.gender,
-    isHighPatrol: payload.isHighPatrol,
-  };
-}
-
 /**
  * Decrypts and parses a scanned badge. Async now (Web Crypto is
  * async) -- callers that used to treat parseMemberBadge as
